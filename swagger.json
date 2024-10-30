@@ -1,0 +1,1671 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Events API",
+    "description": "ISCE Events API"
+  },
+  "host": "http://localhost",
+  "basePath": "/",
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "securityDefinitions": {
+    "apikey": {
+      "type": "apiKey",
+      "name": "apikey",
+      "in": "header"
+    }
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/events/create": {
+      "post": {
+        "tags": [
+          "Event"
+        ],
+        "description": "Create Events",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Event data required to create a new event.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "example": "Party"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Festac Party Event"
+                },
+                "image": {
+                  "type": "string",
+                  "example": "image url"
+                },
+                "location": {
+                  "type": "string",
+                  "example": "123 Sunny Drive"
+                },
+                "town": {
+                  "type": "string",
+                  "example": "Festac"
+                },
+                "user_id": {
+                  "type": "string",
+                  "example": "db3a2d6b-b7f8-4832-9600-477af579b293"
+                },
+                "start_date": {
+                  "type": "string",
+                  "example": "2024-12-01T18:00:00.000Z"
+                },
+                "end_date": {
+                  "type": "string",
+                  "example": "2024-12-02T18:00:00.000Z"
+                },
+                "gallery": {
+                  "type": "string",
+                  "example": "array"
+                },
+                "prices": {
+                  "type": "string",
+                  "example": "array"
+                }
+              },
+              "required": [
+                "title",
+                "location",
+                "town",
+                "user_id",
+                "start_date",
+                "end_date",
+                "gallery",
+                "prices"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Event created successfully.",
+            "schema": {
+              "success": true,
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "title": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "image": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "location": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "town": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "user_id": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "start_date": {
+                  "type": "string",
+                  "example": "datetime"
+                },
+                "end_date": {
+                  "type": "string",
+                  "example": "datetime"
+                },
+                "gallery": {
+                  "type": "string",
+                  "example": "array"
+                },
+                "prices": {
+                  "type": "string",
+                  "example": "array"
+                }
+              },
+              "message": "Event created successfully."
+            }
+          },
+          "400": {
+            "description": "Invalid request data",
+            "schema": {
+              "success": false,
+              "message": "Validation error: Missing or incorrect field values.",
+              "errors": {
+                "title": "Title is required.",
+                "start_date": "Invalid start date format."
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "success": false,
+              "message": "An unexpected error occurred. Please try again later."
+            }
+          }
+        },
+        "security": [
+          {
+            "apikey": []
+          }
+        ]
+      }
+    },
+    "/api/events": {
+      "get": {
+        "tags": [
+          "Event"
+        ],
+        "description": "Get All Events For The Current User",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returned all events for current user",
+            "schema": {
+              "success": true,
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "title": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "image": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "location": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "town": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "user_id": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "start_date": {
+                  "type": "string",
+                  "example": "datetime"
+                },
+                "end_date": {
+                  "type": "string",
+                  "example": "datetime"
+                },
+                "gallery": {
+                  "type": "string",
+                  "example": "array"
+                },
+                "prices": {
+                  "type": "string",
+                  "example": "array"
+                }
+              },
+              "message": "Events returned successfully."
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "apikey": []
+          }
+        ]
+      }
+    },
+    "/api/events/search": {
+      "get": {
+        "tags": [
+          "Event"
+        ],
+        "description": "Search for events using title or description",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Event Found Successfully",
+            "schema": {
+              "success": true,
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "title": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "image": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "location": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "town": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "user_id": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "start_date": {
+                  "type": "string",
+                  "example": "datetime"
+                },
+                "end_date": {
+                  "type": "string",
+                  "example": "datetime"
+                },
+                "gallery": {
+                  "type": "string",
+                  "example": "array"
+                },
+                "prices": {
+                  "type": "string",
+                  "example": "array"
+                }
+              },
+              "message": "Event Returned successfully."
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "apikey": []
+          }
+        ]
+      }
+    },
+
+    "/api/events/search-by-town": {
+      "get": {
+        "tags": [
+          "Event"
+        ],
+        "description": "Search for events using town name",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Event Found Successfully",
+            "schema": {
+              "success": true,
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "title": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "image": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "location": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "town": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "user_id": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "start_date": {
+                  "type": "string",
+                  "example": "datetime"
+                },
+                "end_date": {
+                  "type": "string",
+                  "example": "datetime"
+                },
+                "gallery": {
+                  "type": "string",
+                  "example": "array"
+                },
+                "prices": {
+                  "type": "string",
+                  "example": "array"
+                }
+              },
+              "message": "Event Returned successfully."
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "apikey": []
+          }
+        ]
+      }
+    },
+    "/api/events/{id}": {
+      "get": {
+        "tags": [
+          "Event"
+        ],
+        "description": "Get Event by id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Event Returned Successfully",
+            "schema": {
+              "success": true,
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "title": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "image": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "location": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "town": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "user_id": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "start_date": {
+                  "type": "string",
+                  "example": "datetime"
+                },
+                "end_date": {
+                  "type": "string",
+                  "example": "datetime"
+                },
+                "gallery": {
+                  "type": "string",
+                  "example": "array"
+                },
+                "prices": {
+                  "type": "string",
+                  "example": "array"
+                }
+              },
+              "message": "Event Returned successfully."
+          }
+        },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "apikey": []
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Event"
+        ],
+        "description": "Update an Event",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "example": "Party"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Festac Party Event"
+                },
+                "image": {
+                  "type": "string",
+                  "example": "image url"
+                },
+                "location": {
+                  "type": "string",
+                  "example": "123 Sunny Drive"
+                },
+                "town": {
+                  "type": "string",
+                  "example": "Festac"
+                },
+                "user_id": {
+                  "type": "string",
+                  "example": "db3a2d6b-b7f8-4832-9600-477af579b293"
+                },
+                "start_date": {
+                  "type": "string",
+                  "example": "2024-12-01T18:00:00.000Z"
+                },
+                "end_date": {
+                  "type": "string",
+                  "example": "2024-12-02T18:00:00.000Z"
+                },
+                "gallery": {
+                  "type": "string",
+                  "example": "array"
+                },
+                "prices": {
+                  "type": "string",
+                  "example": "array"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Event Updated Successfully",
+            "schema": {
+              "success": true,
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "title": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "image": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "location": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "town": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "user_id": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "start_date": {
+                  "type": "string",
+                  "example": "datetime"
+                },
+                "end_date": {
+                  "type": "string",
+                  "example": "datetime"
+                },
+                "gallery": {
+                  "type": "string",
+                  "example": "array"
+                },
+                "prices": {
+                  "type": "string",
+                  "example": "array"
+                }
+              },
+              "message": "Event Returned successfully."
+          }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "apikey": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Event"
+        ],
+        "description": "Delete event by id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Event Deleted Successfully"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "apikey": []
+          }
+        ]
+      }
+    },
+    "/api/events/{id}/get-cards": {
+      "post": {
+        "tags": [
+          "Event"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+
+    
+
+    "/api/invite/create": {
+      "post": {
+        "tags": [
+          "Invitation"
+        ],
+        "description": "Create Invitations for Events",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "event_id": {
+                  "example": "535102b5-b786-4337-8a1f-a235b5c80b24"
+                },
+                "invitation_name": {
+                  "example": "Ikeja Party Invite"
+                },
+                "invitation_desc": {
+                  "example": "Invitation for Ikeja party event"
+                },
+                "event_name": {
+                  "example": "Ikeja Party"
+                },
+                "event_invitee_email": {
+                  "example": "teddy@gmail.com"
+                },
+                "event_invitee_name": {
+                  "example": "Teddy"
+                },
+                "event_invitee_phone": {
+                  "example": "09056738292"
+                }
+              },
+              "required": [
+                "invitation_name",
+                "invitation_desc",
+                "event_id",
+                "event_name"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Invitation created successfully",
+            "schema": {
+              "success": true,
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "invitation_name": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "invitation_desc": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "event_id": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "event_name": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "event_invitee_name": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "event_invitee_email": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "event_invitee_phone": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "token": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "accepted": {
+                  "type": "boolean",
+                  "example": "false"
+                }
+              },
+              "message": "Event Returned successfully."
+          }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/invite/update/{id}": {
+      "patch": {
+        "tags": [
+          "Invitation"
+        ],
+        "description": "Update an Invitation using the id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "event_id": {
+                  "example": "535102b5-b786-4337-8a1f-a235b5c80b24"
+                },
+                "invitation_name": {
+                  "example": "Ikeja Party Invite"
+                },
+                "invitation_desc": {
+                  "example": "Invitation for Ikeja party event"
+                },
+                "event_name": {
+                  "example": "Ikeja Party"
+                },
+                "event_invitee_email": {
+                  "example": "teddy@gmail.com"
+                },
+                "event_invitee_name": {
+                  "example": "Teddy"
+                },
+                "event_invitee_phone": {
+                  "example": "09056738292"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Invitation updated successfully",
+            "schema": {
+              "success": true,
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "invitation_name": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "invitation_desc": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "event_id": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "event_name": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "event_invitee_name": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "event_invitee_email": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "event_invitee_phone": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "token": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "accepted": {
+                  "type": "boolean",
+                  "example": "false"
+                }
+              },
+              "message": "Event Returned successfully."
+          }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/invite/{eventId}/{inviteToken}": {
+      "get": {
+        "tags": [
+          "Invitation"
+        ],
+        "description": "Get and Validate an Invitation using the event_id and invite token",
+        "parameters": [
+          {
+            "name": "eventId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "inviteToken",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Invitation is valid. Proceed to accept.",
+            "schema": {
+              "success": true,
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "invitation_name": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "invitation_desc": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "event_id": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "event_name": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "event_invitee_name": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "event_invitee_email": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "event_invitee_phone": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "token": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "accepted": {
+                  "type": "boolean",
+                  "example": "false"
+                }
+              },
+              "message": "Event Returned successfully."
+          }
+          },
+          "400": {
+            "description": "Bad Request, invalid invitation."
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/invite/accept/{inviteToken}": {
+      "post": {
+        "tags": [
+          "Invitation"
+        ],
+        "description": "Accept an Invitation using the invite token",
+        "parameters": [
+          {
+            "name": "inviteToken",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Invitation accepted successfully."
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/invite/delete-all/{event_id}": {
+      "delete": {
+        "tags": [
+          "Invitation"
+        ],
+        "description": "Delete all invitations for a specific event using the event_id",
+        "parameters": [
+          {
+            "name": "event_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "All Invitations deleted successfully."
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/invite/delete-one/{id}": {
+      "delete": {
+        "tags": [
+          "Invitation"
+        ],
+        "description": "Deleted a specific invitation using the id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Invitation deleted successfully"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+
+
+
+    "/api/chat-room/create": {
+      "post": {
+        "tags": [
+          "Chat"
+        ],
+        "description": "Create a chat room for a specific event using the event_id",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "event_id": {
+                  "example": "601459a2-b2f7-4d23-8ae5-54472963617a"
+                },
+                "event_name": {
+                  "example": "Lagos Party"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Chat room created successfully",
+            "schema": {
+              "success": true,
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "event_id": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "event_name": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "createdAt": {
+                  "type": "datetime",
+                  "example": "datetime"
+                },
+                "updatedAt": {
+                  "type": "datetime",
+                  "example": "datetime"
+                }
+              },
+              "message": "Chat Room Returned successfully."
+          }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/chat-messages/{chat_room_id}": {
+      "get": {
+        "tags": [
+          "Chat"
+        ],
+        "description": "Get all messages for a specific chat room using the chat_room_id",
+        "parameters": [
+          {
+            "name": "chat_room_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returned all chat messages successfully."
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+
+
+
+    "/api/card/events": {
+      "get": {
+        "tags": [
+          "Card"
+        ],
+        "description": "Get Events",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "apikey": []
+          }
+        ]
+      }
+    },
+    "/api/card/events/open": {
+      "get": {
+        "tags": [
+          "Card"
+        ],
+        "description": "Get Events",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "apikey": []
+          }
+        ]
+      }
+    },
+    "/api/card/events/register": {
+      "post": {
+        "tags": [
+          "Card"
+        ],
+        "description": "Get Event by id",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "apikey": []
+          }
+        ]
+      }
+    },
+    "/api/card/events/token/{id}": {
+      "get": {
+        "tags": [
+          "Card"
+        ],
+        "description": "Get Event by id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "apikey": []
+          }
+        ]
+      }
+    },
+    "/api/card/events/chip/{id}": {
+      "get": {
+        "tags": [
+          "Card"
+        ],
+        "description": "Get Event by id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "apikey": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Card"
+        ],
+        "description": "Get Event by id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "apikey": []
+          }
+        ]
+      }
+    },
+    "/api/card/events/payment/success": {
+      "post": {
+        "tags": [
+          "Card"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+
+
+    "/api/attendee/create": {
+      "post": {
+        "tags": [
+          "Attendee"
+        ],
+        "description": "Create Attendee",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "event_id": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "image": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "phone": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "price_category": {
+                  "type": "string",
+                  "example": "string"
+                }
+              },
+              "required": [
+                "event_id",
+                "image",
+                "name",
+                "email",
+                "phone",
+                "price_category"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Attendee created successfully."
+          }
+        },
+        "security": [
+          {
+            "apikey": []
+          }
+        ]
+      }
+    },
+    "/api/attendees/{id}": {
+      "get": {
+        "tags": [
+          "Attendee"
+        ],
+        "description": "Get Attendees by event_id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "apikey": []
+          }
+        ]
+      }
+    },
+    "/api/attendees/check/{id}": {
+      "post": {
+        "tags": [
+          "Attendee"
+        ],
+        "description": "Set checked in status for an attendee",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+
+
+    "/api/card/events_chat/create/{id}": {
+      "post": {
+        "tags": [
+          "Arena"
+        ],
+        "description": "Create Event Chat with specific event_id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "apikey": []
+          }
+        ]
+      }
+    },
+    "/api/send/thankyou": {
+      "get": {
+        "tags": [
+          "Arena"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  }
+}
