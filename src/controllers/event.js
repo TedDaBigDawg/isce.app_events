@@ -92,6 +92,8 @@ const createEvent = async (req, res) => {
     if(prices?.length < 1){
       return res.status(404).send({ success: "false", message: "Unable to create event" });
     }
+
+    console.log(req?.isce_auth?.id);
     
     event = await Event.create({
       id: guid(),
