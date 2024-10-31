@@ -8,6 +8,7 @@ const { getGallery } = require("../models/gallery");
 const { getAttendees, getChats } = require("../models/attendee");
 const logger = require("../util/log");
 const slugify = require('slugify');
+const jwt = require('jsonwebtoken');
 
 const createEvent = async (req, res) => {
   /*
@@ -92,12 +93,17 @@ const createEvent = async (req, res) => {
     if(prices?.length < 1){
       return res.status(404).send({ success: "false", message: "Unable to create event" });
     }
+    const token = req.header("Authorization");
+    let user_id;
 
-    console.log(req?.isce_auth?.id);
+    const decoded = jwt.decode(token);
+    user_id = decoded?.user?.id;
+
+    console.log(user_id);
     
     event = await Event.create({
       id: guid(),
-      user_id: req?.isce_auth?.id || "db3a2d6b-b7f8-4832-9600-477af579b293",
+      user_id: user_id || "db3a2d6b-b7f8-4832-9600-477af579b293",
       image: req?.body?.image,
       clean_name: clean_name,
       title: req?.body?.title,
