@@ -79,25 +79,28 @@ const createEvent = async (req, res) => {
   try {
     //const clean_name = req?.body?.title?.replace(/ /g,"-");
     const clean_name = slugify(req?.body?.title);
+    let newPrices;
+    let newGallery;
     let event = await Event.findOne({
       where: {
         clean_name: clean_name
       }
-    });
+    });                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+
     if(event){
       return res.status(404).send({ success: "false", message: "Event name already exists" });
     }
 
     //If no prices add, don't save 
-    const prices = req?.body?.prices;
-    if(prices?.length < 1){
-      return res.status(404).send({ success: "false", message: "Unable to create event" });
-    }
+    
+    // if(prices?.length < 1){
+    //   return res.status(404).send({ success: "false", message: "Unable to create event" });
+    // }
     const token = req.header("Authorization");
     let user_id;
 
     const decoded = jwt.decode(token);
-    user_id = decoded?.user?.id;
+    user_id = decoded?.id;
 
     console.log(user_id);
     
@@ -120,7 +123,9 @@ const createEvent = async (req, res) => {
       return res.status(404).send({ success: "false", message: "Unable to create event" });
     }
     
-    const newPrices = await Promise.all(
+    if (req?.body?.prices) {
+      const prices = req?.body?.prices;
+     newPrices = await Promise.all(
       prices.map(price => Price.create({
         id: guid(),
         event_id: event.id,
@@ -128,15 +133,21 @@ const createEvent = async (req, res) => {
         order_amount: 0
       }))
     );
+  }
+    
 
-    const gallery = req?.body?.gallery || [];
-    const newGallery = await Promise.all(
+    if (req?.body?.gallery) {
+      const gallery = req?.body?.gallery || [];
+     newGallery = await Promise.all(
       gallery.map(item => Gallery.create({
         id: guid(),
         event_id: event.id,
         ...item
       }))
     );
+
+    }
+    
 
     return res.status(200).send({
       success: "true",
@@ -286,13 +297,13 @@ const getEvents = async (req, res) => {
     
     const user = req?.isce_auth;
 
-    console.log(req.isce_auth.user.id);
+    console.log('ID', req.isce_auth.id);
     const events = await Event.findAll({
       limit,
       offset,
       where: {
         user_id: {
-          [Op.eq]: req.isce_auth.user.id,
+          [Op.eq]: req.isce_auth.id,
         }
       }
     });
@@ -429,7 +440,7 @@ const getEvent = async (req, res) => {
       return res.status(404).send({ success: "false", message: "No data found" });
     }
     
-    const user = req?.isce_auth.user;
+    const user = req?.isce_auth;
     const yesterday = new Date((new Date()).valueOf() - 1000*60*60*24);
     const past = (new Date(event?.start_date) < yesterday);
 

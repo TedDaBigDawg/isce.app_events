@@ -19,14 +19,15 @@ const authenticate = (req, res, next) => {
       try {
         // Decode the JWT token to extract the payload (email, password, etc.)
         const decoded = jwt.decode(token);
-        name = decoded?.user?.name;
-        id = decoded?.user?.id;
-        email = decoded?.user?.email;
+        console.log('DECODED', decoded);
+        name = decoded?.fullname;
+        id = decoded?.id;
+        email = decoded?.email;
         password = decoded?.password;
 
-        // console.log('Email from token:', id);
+        console.log('Email from token:', email);
 
-        // console.log('Email from token:', name);
+        console.log('Name from token:', name);
 
         // console.log('Email from token:', email);
         // If email and password are found in the token, use them
@@ -40,7 +41,7 @@ const authenticate = (req, res, next) => {
     }
     try {
       const { data: auth } = await axios.post(
-        config.auth.url + "/auth/signin/USER",
+        config.auth.url + "/auth/signin-events",
         { email: email, password: password },
         {
           headers: {
@@ -50,9 +51,9 @@ const authenticate = (req, res, next) => {
         }
       );
       // console.log('Email from token:', email);
-      // console.log(auth);
+      console.log('AUTH', auth);
 
-      if (auth.success === "true") {
+      if (auth.success === true) {
         
          user = jwt.decode(auth?.token);
          req.isce_auth = user;
