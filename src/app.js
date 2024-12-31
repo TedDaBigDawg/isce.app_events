@@ -16,7 +16,7 @@ const { guid, sortDate } = require("./util");
 const server = require("http").Server(app);
 const io = new Server(server, {
   cors: {
-    origin: ["http://localhost:3000", "http://localhost:3001",], // allow requests from this origin
+    origin: ["http://localhost:3000", "http://localhost:3001", 'https://isceauth.onrender.com'], // allow requests from this origin
     methods: ["GET", "POST"],        // allowed methods
     credentials: true               // allow cookies
 }
@@ -90,9 +90,9 @@ app.use(
 app.use("/assets", express.static("./src/storage"));
 
 app.use(cors({
-  origin: 'http://localhost:3000', // Change to your frontend URL
+  origin: ['http://localhost:3000', 'https://isceauth.onrender.com'], // Change to your frontend URL
   methods: ['GET', 'POST'],
-  allowedHeaders: ['Content-Type'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
 }));
 
