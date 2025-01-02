@@ -5,10 +5,9 @@
     "title": "Events API",
     "description": "ISCE Events API"
   },
-  "host": "localhost:5241",
+  "host": "eventnest-slbg.onrender.com",
   "basePath": "/",
   "schemes": [
-    "http",
     "https"
   ],
   "securityDefinitions": {
