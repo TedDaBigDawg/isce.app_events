@@ -77,8 +77,14 @@ const createEvent = async (req, res) => {
   */
 
   try {
+
+    const { title, location, Town, description, start_date, end_date, image } = req.body;
+
+    if (!title || !location || !Town || !description || !start_date || !end_date) {
+      return res.status(400).send({ success: "false", message: "Missing required fields" });
+    }
     //const clean_name = req?.body?.title?.replace(/ /g,"-");
-    const clean_name = slugify(req?.body?.title);
+    const clean_name = slugify(title);
     let newPrices;
     let newGallery;
     let event = await Event.findOne({
@@ -107,14 +113,14 @@ const createEvent = async (req, res) => {
     event = await Event.create({
       id: guid(),
       user_id: user_id || "db3a2d6b-b7f8-4832-9600-477af579b293",
-      image: req?.body?.image,
+      image: image,
       clean_name: clean_name,
-      title: req?.body?.title,
-      location: req?.body?.location,
-      Town: req?.body?.Town,
-      description: req?.body?.description,
-      start_date: req?.body?.start_date,
-      end_date: req?.body?.end_date,
+      title: title,
+      location: location,
+      Town: Town,
+      description: description,
+      start_date: start_date,
+      end_date: end_date,
     });
 
     // console.log('event isce-auth', req?.isce_auth);
