@@ -432,7 +432,7 @@ const getEvent = async (req, res) => {
     const event = await Event.findOne({ 
       where: { 
         id: req?.params?.id,
-        user_id: req.isce_auth.user.id 
+        user_id: req.isce_auth.id 
       } 
     });
 
